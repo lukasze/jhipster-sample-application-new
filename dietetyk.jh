@@ -1,0 +1,17 @@
+entity Food {
+	name String,
+    calories Float,
+    proteins Float,
+    carbs Float,
+    fats Float
+    
+}
+
+entity Meal {
+	date LocalDate,
+    quantity Float,
+}
+
+relationship OneToMany {
+	Food to Meal
+}
