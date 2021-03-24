@@ -1,0 +1,69 @@
+<div>
+    <h2 id="page-heading">
+        <span>Foods</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-food" [routerLink]="['/food/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Food
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="foods?.length === 0">
+        <span>No foods found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="foods && foods.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Name</span></th>
+                    <th scope="col" ><span>Calories</span></th>
+                    <th scope="col" ><span>Proteins</span></th>
+                    <th scope="col" ><span>Carbs</span></th>
+                    <th scope="col" ><span>Fats</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let food of foods ;trackBy: trackId">
+                    <td><a [routerLink]="['/food', food.id, 'view']">{{ food.id }}</a></td>
+                    <td>{{ food.name }}</td>
+                    <td>{{ food.calories }}</td>
+                    <td>{{ food.proteins }}</td>
+                    <td>{{ food.carbs }}</td>
+                    <td>{{ food.fats }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/food', food.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/food', food.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(food)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
